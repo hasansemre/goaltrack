@@ -5,6 +5,7 @@ import path from 'path'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  base: '/goaltrack/',
   plugins: [
     react(),
     tailwindcss(),
@@ -19,8 +20,8 @@ export default defineConfig({
         background_color: '#0f0f14',
         display: 'standalone',
         orientation: 'portrait',
-        scope: '/',
-        start_url: '/',
+        scope: '/goaltrack/',
+        start_url: '/goaltrack/',
         icons: [
           {
             src: 'pwa-192x192.png',

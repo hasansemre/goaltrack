@@ -20,23 +20,26 @@ function GuestRoute() {
   return <Outlet />;
 }
 
-export const router = createBrowserRouter([
-  {
-    element: <GuestRoute />,
-    children: [
-      { path: '/login', element: <Login /> },
-      { path: '/register', element: <Register /> },
-    ],
-  },
-  {
-    element: <ProtectedRoute />,
-    children: [
-      { path: '/', element: <Dashboard /> },
-      { path: '/management', element: <Management /> },
-      { path: '/statistics', element: <Statistics /> },
-      { path: '/badges', element: <Badges /> },
-      { path: '/profile', element: <Profile /> },
-    ],
-  },
-  { path: '*', element: <Navigate to="/" replace /> },
-]);
+export const router = createBrowserRouter(
+  [
+    {
+      element: <GuestRoute />,
+      children: [
+        { path: '/login', element: <Login /> },
+        { path: '/register', element: <Register /> },
+      ],
+    },
+    {
+      element: <ProtectedRoute />,
+      children: [
+        { path: '/', element: <Dashboard /> },
+        { path: '/management', element: <Management /> },
+        { path: '/statistics', element: <Statistics /> },
+        { path: '/badges', element: <Badges /> },
+        { path: '/profile', element: <Profile /> },
+      ],
+    },
+    { path: '*', element: <Navigate to="/" replace /> },
+  ],
+  { basename: '/goaltrack' }
+);

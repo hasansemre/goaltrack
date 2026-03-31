@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // GitHub Pages SPA redirect trick
+      const path = window.location.pathname;
+      const base = '/goaltrack';
+      const rest = path.startsWith(base) ? path.slice(base.length) : path;
+      const search = window.location.search;
+      const hash = rest + (search ? '?' + search.slice(1).split('&').map(s => s.replace('=', '=')).join('&') : '');
+      sessionStorage.setItem('redirect', hash || '/');
+      window.location.replace(base + '/');
+    </script>
+  </head>
+  <body></body>
+</html>

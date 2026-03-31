@@ -12,6 +12,15 @@
     <meta name="apple-mobile-web-app-title" content="GoalTrack" />
     <meta name="mobile-web-app-capable" content="yes" />
     <title>GoalTrack</title>
+    <script>
+      (function () {
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          if (redirect !== '/') history.replaceState(null, '', redirect);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
