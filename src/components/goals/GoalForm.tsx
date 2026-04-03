@@ -90,10 +90,16 @@ export default function GoalForm({ onClose, editGoal }: Props) {
   const selectedCategory = CATEGORIES.find((c) => c.id === categoryId);
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-700">
+    <div
+      className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+    >
+      <div
+        className="bg-white dark:bg-gray-800 rounded-t-3xl sm:rounded-2xl w-full max-w-lg flex flex-col"
+        style={{ maxHeight: 'calc(92svh - env(safe-area-inset-bottom, 0px))' }}
+      >
+        {/* Header — sabit, scroll edilmez */}
+        <div className="flex-shrink-0 flex items-center justify-between px-5 pt-5 pb-4 border-b border-gray-100 dark:border-gray-700">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white">
             {editGoal ? 'Hedefi Düzenle' : 'Yeni Hedef'}
           </h2>
@@ -102,23 +108,24 @@ export default function GoalForm({ onClose, editGoal }: Props) {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-5 space-y-5">
-          {/* Kategori */}
+        {/* Form alanları — scroll edilebilir */}
+        <form id="goal-form" onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+          {/* Kategori — yatay kaydırmalı */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Kategori</label>
-            <div className="grid grid-cols-4 gap-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">Kategori</label>
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat.id}
                   type="button"
                   onClick={() => setCategoryId(cat.id)}
-                  className={`flex flex-col items-center gap-1 p-2 rounded-xl border-2 transition ${
-                    categoryId === cat.id ? 'border-current' : 'border-gray-100 dark:border-gray-600 hover:border-gray-200 dark:hover:border-gray-500'
+                  className={`flex-shrink-0 flex flex-col items-center gap-1 p-2 rounded-xl border-2 transition w-[68px]${
+                    categoryId === cat.id ? '' : ' border-gray-100 dark:border-gray-600'
                   }`}
                   style={categoryId === cat.id ? { borderColor: cat.color, backgroundColor: cat.color + '18' } : {}}
                 >
                   <span className="text-xl">{cat.icon}</span>
-                  <span className="text-xs text-gray-600 dark:text-gray-300 font-medium leading-tight text-center">
+                  <span className="text-[10px] text-gray-600 dark:text-gray-300 font-medium leading-tight text-center line-clamp-2">
                     {cat.name}
                   </span>
                 </button>
@@ -278,8 +285,14 @@ export default function GoalForm({ onClose, editGoal }: Props) {
             </>
           )}
 
-          {/* Buttons */}
-          <div className="flex gap-3 pt-2">
+        </form>
+
+        {/* Butonlar — sabit altta, her zaman görünür */}
+        <div className="flex-shrink-0 px-5 pb-5 pt-3 border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+          {repeatType === 'custom' && repeatDays.length === 0 && (
+            <p className="text-xs text-red-500 text-center mb-2">En az bir gün seçin</p>
+          )}
+          <div className="flex gap-3">
             <button
               type="button"
               onClick={onClose}
@@ -289,16 +302,14 @@ export default function GoalForm({ onClose, editGoal }: Props) {
             </button>
             <button
               type="submit"
+              form="goal-form"
               disabled={isSubmitting || (repeatType === 'custom' && repeatDays.length === 0)}
               className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold transition disabled:opacity-50"
             >
               {isSubmitting ? 'Kaydediliyor...' : 'Kaydet'}
             </button>
           </div>
-          {repeatType === 'custom' && repeatDays.length === 0 && (
-            <p className="text-xs text-red-500 text-center -mt-3">En az bir gün seçin</p>
-          )}
-        </form>
+        </div>
       </div>
     </div>
   );
