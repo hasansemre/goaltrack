@@ -3,11 +3,30 @@
 export type CategoryId =
   | 'walking'
   | 'cardio'
-  | 'wellness'
   | 'fitness'
+  | 'yoga'
+  | 'cycling'
+  | 'swimming'
+  | 'sports'
+  | 'nutrition'
+  | 'sleep'
+  | 'meditation'
   | 'reading'
   | 'language'
-  | 'education';
+  | 'education'
+  | 'writing'
+  | 'coding'
+  | 'music'
+  | 'art'
+  | 'photography'
+  | 'gaming'
+  | 'cooking'
+  | 'finance'
+  | 'work'
+  | 'social'
+  | 'travel'
+  | 'outdoor'
+  | 'wellness';
 
 export type GoalPeriod = 'daily' | 'weekly' | 'monthly' | 'yearly';
 export type DurationUnit = 'minutes' | 'hours' | 'seconds';

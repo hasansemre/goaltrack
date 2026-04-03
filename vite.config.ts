@@ -11,18 +11,23 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
+      includeAssets: ['favicon.svg', 'favicon.ico', 'apple-touch-icon-180x180.png', 'pwa-64x64.png', 'pwa-192x192.png', 'pwa-512x512.png', 'maskable-icon-512x512.png'],
       manifest: {
         name: 'GoalTrack',
         short_name: 'GoalTrack',
         description: 'Kişisel hedef ve alışkanlık takip uygulaması',
-        theme_color: '#863bff',
-        background_color: '#0f0f14',
+        theme_color: '#2d0b61',
+        background_color: '#0c0120',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/goaltrack/',
         start_url: '/goaltrack/',
         icons: [
+          {
+            src: 'pwa-64x64.png',
+            sizes: '64x64',
+            type: 'image/png',
+          },
           {
             src: 'pwa-192x192.png',
             sizes: '192x192',
@@ -34,7 +39,7 @@ export default defineConfig({
             type: 'image/png',
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'maskable-icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable',

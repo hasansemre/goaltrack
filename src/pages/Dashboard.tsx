@@ -9,6 +9,7 @@ import { todayDisplay, today, getWeekRange, getMonthRange, getYearRange } from '
 import { calcPercentage, formatDuration } from '@/utils/progressUtils';
 import type { Goal, GoalPeriod, RepeatType } from '@/types';
 import PageLayout from '@/components/layout/PageLayout';
+import AppLogo from '@/components/layout/AppLogo';
 import GoalForm from '@/components/goals/GoalForm';
 import BadgeEarnedModal from '@/components/badges/BadgeEarnedModal';
 import DurationModal from '@/components/goals/DurationModal';
@@ -160,11 +161,14 @@ export default function Dashboard() {
 
         {/* ── Header ──────────────────────────────────────────── */}
         <div className="flex items-center justify-between mb-4">
-          <div>
-            <p className="text-xs text-gray-400 dark:text-gray-500 font-medium">{todayDisplay()}</p>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white mt-0.5">
-              Merhaba, {user?.name?.split(' ')[0]} 👋
-            </h1>
+          <div className="flex items-center gap-2.5">
+            <AppLogo size={36} />
+            <div>
+              <p className="text-xs text-gray-400 dark:text-gray-500 font-medium">{todayDisplay()}</p>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white mt-0.5">
+                Merhaba, {user?.name?.split(' ')[0]} 👋
+              </h1>
+            </div>
           </div>
           {streak > 0 && (
             <div className="flex items-center gap-1 bg-orange-50 border border-orange-200 px-2.5 py-1 rounded-full">
