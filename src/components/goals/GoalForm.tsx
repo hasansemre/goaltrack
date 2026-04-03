@@ -91,12 +91,11 @@ export default function GoalForm({ onClose, editGoal }: Props) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center"
-      style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      className="fixed inset-0 bg-black/60 z-[100] flex items-end sm:items-center justify-center"
     >
       <div
         className="bg-white dark:bg-gray-800 rounded-t-3xl sm:rounded-2xl w-full max-w-lg flex flex-col"
-        style={{ maxHeight: 'calc(92svh - env(safe-area-inset-bottom, 0px))' }}
+        style={{ maxHeight: 'calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 1rem)' }}
       >
         {/* Header — sabit, scroll edilmez */}
         <div className="flex-shrink-0 flex items-center justify-between px-5 pt-5 pb-4 border-b border-gray-100 dark:border-gray-700">
@@ -288,7 +287,10 @@ export default function GoalForm({ onClose, editGoal }: Props) {
         </form>
 
         {/* Butonlar — sabit altta, her zaman görünür */}
-        <div className="flex-shrink-0 px-5 pb-5 pt-3 border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div
+          className="flex-shrink-0 px-5 pt-3 border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800"
+          style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))' }}
+        >
           {repeatType === 'custom' && repeatDays.length === 0 && (
             <p className="text-xs text-red-500 text-center mb-2">En az bir gün seçin</p>
           )}
