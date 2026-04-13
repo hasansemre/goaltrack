@@ -31,9 +31,13 @@ export default function DurationModal({ goal, onClose, onSubmit }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-sm">
-        <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-700">
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center">
+      <div
+        className="bg-white dark:bg-gray-800 rounded-t-3xl sm:rounded-2xl w-full max-w-sm flex flex-col"
+        style={{ maxHeight: 'calc(100dvh - env(safe-area-inset-top, 0px) - 1rem)' }}
+      >
+        {/* Header — sabit */}
+        <div className="flex-shrink-0 flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2">
             <span className="text-xl">{cat?.icon}</span>
             <div>
@@ -48,7 +52,8 @@ export default function DurationModal({ goal, onClose, onSubmit }: Props) {
           </button>
         </div>
 
-        <div className="p-5">
+        {/* İçerik — scroll edilebilir */}
+        <div className="flex-1 overflow-y-auto p-5">
           <p className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Ne kadar süre harcadın?</p>
 
           {/* Hızlı seçenekler */}
@@ -69,7 +74,7 @@ export default function DurationModal({ goal, onClose, onSubmit }: Props) {
           </div>
 
           {/* Özel değer */}
-          <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center gap-3">
             <input
               type="number"
               value={value}
@@ -82,21 +87,25 @@ export default function DurationModal({ goal, onClose, onSubmit }: Props) {
               {unitLabel}
             </span>
           </div>
+        </div>
 
-          <div className="flex gap-3">
-            <button
-              onClick={onClose}
-              className="flex-1 py-3 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-600 dark:text-gray-300 font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition"
-            >
-              İptal
-            </button>
-            <button
-              onClick={() => onSubmit(value)}
-              className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold transition"
-            >
-              Tamamla
-            </button>
-          </div>
+        {/* Butonlar — her zaman görünür */}
+        <div
+          className="flex-shrink-0 px-5 pt-3 border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 flex gap-3"
+          style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))' }}
+        >
+          <button
+            onClick={onClose}
+            className="flex-1 py-3 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-600 dark:text-gray-300 font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+          >
+            İptal
+          </button>
+          <button
+            onClick={() => onSubmit(value)}
+            className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold transition"
+          >
+            Tamamla
+          </button>
         </div>
       </div>
     </div>
