@@ -31,7 +31,7 @@ export default function DurationModal({ goal, onClose, onSubmit }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center">
+    <div className="fixed inset-0 bg-black/50 z-[100] flex items-end sm:items-center justify-center">
       <div
         className="bg-white dark:bg-gray-800 rounded-t-3xl sm:rounded-2xl w-full max-w-sm flex flex-col"
         style={{ maxHeight: 'calc(100dvh - env(safe-area-inset-top, 0px) - 1rem)' }}
