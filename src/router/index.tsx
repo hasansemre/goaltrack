@@ -1,12 +1,22 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
-import Login from '@/pages/Login';
-import Register from '@/pages/Register';
-import Dashboard from '@/pages/Dashboard';
-import Management from '@/pages/Management';
-import Statistics from '@/pages/Statistics';
-import Badges from '@/pages/Badges';
-import Profile from '@/pages/Profile';
+
+const Login = lazy(() => import('@/pages/Login'));
+const Register = lazy(() => import('@/pages/Register'));
+const Dashboard = lazy(() => import('@/pages/Dashboard'));
+const Management = lazy(() => import('@/pages/Management'));
+const Statistics = lazy(() => import('@/pages/Statistics'));
+const Badges = lazy(() => import('@/pages/Badges'));
+const Profile = lazy(() => import('@/pages/Profile'));
+
+function PageLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+      <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
 
 function ProtectedRoute() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -20,23 +30,31 @@ function GuestRoute() {
   return <Outlet />;
 }
 
+function withSuspense(Component: React.ComponentType) {
+  return (
+    <Suspense fallback={<PageLoader />}>
+      <Component />
+    </Suspense>
+  );
+}
+
 export const router = createBrowserRouter(
   [
     {
       element: <GuestRoute />,
       children: [
-        { path: '/login', element: <Login /> },
-        { path: '/register', element: <Register /> },
+        { path: '/login', element: withSuspense(Login) },
+        { path: '/register', element: withSuspense(Register) },
       ],
     },
     {
       element: <ProtectedRoute />,
       children: [
-        { path: '/', element: <Dashboard /> },
-        { path: '/management', element: <Management /> },
-        { path: '/statistics', element: <Statistics /> },
-        { path: '/badges', element: <Badges /> },
-        { path: '/profile', element: <Profile /> },
+        { path: '/', element: withSuspense(Dashboard) },
+        { path: '/management', element: withSuspense(Management) },
+        { path: '/statistics', element: withSuspense(Statistics) },
+        { path: '/badges', element: withSuspense(Badges) },
+        { path: '/profile', element: withSuspense(Profile) },
       ],
     },
     { path: '*', element: <Navigate to="/" replace /> },

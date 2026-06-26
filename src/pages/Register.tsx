@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import AppLogo from '@/components/layout/AppLogo';
 import { useAuthStore } from '@/stores/authStore';
 import { useGoalStore } from '@/stores/goalStore';
 import { useBadgeStore } from '@/stores/badgeStore';
@@ -67,7 +68,7 @@ export default function Register() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="text-5xl mb-3">🎯</div>
+          <div className="flex justify-center mb-3"><AppLogo size={64} /></div>
           <h1 className="text-3xl font-bold text-gray-900">GoalTrack</h1>
           <p className="text-gray-500 mt-1">Hedeflerine ulaşmanın en kolay yolu</p>
         </div>
